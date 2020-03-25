@@ -5,3 +5,6 @@ venv/
 # Hide compiled python files
 *.pyc
 __pycache__/
+
+# Hide true config file
+config.py
