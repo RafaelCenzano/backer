@@ -18,7 +18,7 @@ class Config:
     FILES_TO_BACKUP = []
 
     # Folders to not zip
-    FOLDER_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'thing')]
+    FOLDERS_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'thing')]
 
     # Files to not zip
-    FILE_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'file.txt')]
+    FILES_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'file.txt')]
