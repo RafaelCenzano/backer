@@ -11,11 +11,8 @@ class Config:
     # Folder to store backups
     BACKUP_FOLDER = os.path.join('Library', 'Backup')
 
-    # Folders to backup
-    FOLDERS_TO_BACKUP = [os.path.join('Users', 'jimdoe', 'Documents'), os.path.join('Users', 'jimdoe', 'Downloads'), os.path.join('Users', 'jimdoe', 'Desktop')]
-
-    # Files to backup
-    FILES_TO_BACKUP = []
+    # Folders to zip
+    FOLDERS_TO_ZIP = [os.path.join('Users', 'jimdoe', 'Documents')]
 
     # Folders to not zip
     FOLDERS_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'thing')]
