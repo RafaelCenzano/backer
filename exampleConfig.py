@@ -24,4 +24,4 @@ class Config:
     # Time to zip
     # NOTE: Might slow computer/use up read and write of your storage system.
     # Example 7:30PM local time \/
-    TIME_TO_ZIP = datetime.time(hour=19, minute=30, second=20)
+    TIME_TO_ZIP = datetime.time(hour=12 + 7, minute=30, second=20)
