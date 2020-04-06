@@ -5,6 +5,8 @@ import datetime
 Config for backer
 
 create empty lists for things you don't need or want
+
+Always use absolute paths within this configuration file
 '''
 
 class Config:
