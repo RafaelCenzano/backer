@@ -1,10 +1,12 @@
 import os
 import zipfile
+import logging
 import datetime
 
 '''
 File for main code
 '''
+
 
 class Core:
 
@@ -12,6 +14,27 @@ class Core:
         
         self.config = configObject
         self.config.FOLDERS_TO_NOT_ZIP.append(self.config.BACKUP_FOLDER)
+
+        # create logger
+        self.logger = logging.getLogger(__name__)
+
+        # create console handler and set level to info
+        term = logging.StreamHandler()
+
+        logfile = logging.FileHandler('/' + os.path.join(self.config.BACKUP_FOLDER, 'logs', 'backer.log'))
+
+        # create formatter
+        formatter = logging.Formatter('%(asctime)s %(name)s - %(levelname)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+        # add formatter to term
+        term.setFormatter(formatter)
+        logfile.setFormatter(formatter)
+
+        # add term to logger
+        self.logger.addHandler(term)
+        self.logger.addHandler(logfile)
+
+        self.logger.setLevel(logging.INFO)
 
     def zipArchive(self):
 
