@@ -15,19 +15,16 @@ configurations = config.Config()
 # create logger
 logger = logging.getLogger(__name__)
 
-# create console handler and set level to info
+# create console and file handler
 term = logging.StreamHandler()
-
 logfile = logging.FileHandler('/' + os.path.join(configurations.BACKUP_FOLDER, 'logs', 'backer.log'))
 
-# create formatter
+# create formatter and add to term and logfile
 formatter = logging.Formatter('%(asctime)s %(name)s - %(levelname)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-
-# add formatter to term
 term.setFormatter(formatter)
 logfile.setFormatter(formatter)
 
-# add term to logger
+# add term and logfile to logger
 logger.addHandler(term)
 logger.addHandler(logfile)
 
