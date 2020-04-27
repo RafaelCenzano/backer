@@ -24,42 +24,41 @@ class Core:
 
         todayFormatted = repr(startZip.month) + '-' + repr(startZip.day) + '-' + repr(startZip.year)
 
-        archiveName = os.path.join(self.config.BACKUP_FOLDER, 'day', self.config.BACKUP_NAME + '_' + todayFormatted + '.zip')
+        archiveName = '/' + os.path.join(self.config.BACKUP_FOLDER, 'day', self.config.BACKUP_NAME + '_' + todayFormatted + '.zip')
 
-        zipper = zipfile.ZipFile(archiveName, 'w', compression=zipfile.ZIP_DEFLATED)
+        with zipfile.ZipFile(archiveName, 'w', compression=zipfile.ZIP_DEFLATED) as zipper:
 
-        for pathThing in folders:
+            for pathThing in folders:
 
-            for root, dirs, files in os.walk(pathThing):
+                for root, dirs, files in os.walk(pathThing):
 
-                for things in files:
+                    for things in files:
 
-                    currentPath = os.path.join(root, things)
-                    folderCheck = True
+                        currentPath = os.path.join(root, things)
+                        folderCheck = True
 
-                    for notDirectory in self.config.FOLDERS_TO_NOT_ZIP:
-                        if notDirectory in currentPath:
-                            folderCheck = False
-                            break
+                        for notDirectory in self.config.FOLDERS_TO_NOT_ZIP:
+                            if notDirectory in currentPath:
+                                folderCheck = False
+                                break
 
-                    if folderCheck:
+                        if folderCheck:
 
-                        if os.path.islink(currentPath):
-                            print(f'skipping : {currentPath}')
+                            if os.path.islink(currentPath):
+                                print(f'skipping : {currentPath}')
 
-                        else:
-                            fileCheck = True
+                            else:
+                                fileCheck = True
 
-                            for notFile in self.config.FILES_TO_NOT_ZIP:
-                                if notfile == currentPath:
-                                    fileCheck = False
+                                for notFile in self.config.FILES_TO_NOT_ZIP:
+                                    if notfile == currentPath:
+                                        fileCheck = False
 
-                            if fileCheck:
-                                print(f'zipping : {currentPath}')
-                                zipper.write(currentPath)
-
-        zipper.close()
+                                if fileCheck:
+                                    print(f'zipping : {currentPath}')
+                                    zipper.write(currentPath)
+                                    
 
         endZip = datetime.datetime.now()
-        print(end - start)
+        print(endZip - startZip)
     
