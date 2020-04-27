@@ -11,6 +11,7 @@ class Core:
     def __init__(self, configObject):
         
         self.config = configObject
+        self.config.FOLDERS_TO_NOT_ZIP.append(self.config.BACKUP_FOLDER)
 
     def zipArchive(self):
 
@@ -28,14 +29,32 @@ class Core:
         zipper = zipfile.ZipFile(archiveName, 'w', compression=zipfile.ZIP_DEFLATED)
 
         for pathThing in folders:
+
             for root, dirs, files in os.walk(pathThing):
+
                 for things in files:
+
                     currentPath = os.path.join(root, things)
-                    if '/Users/rafael/Documents/3D printing/' not in currentPath:
+                    folderCheck = True
+
+                    for notDirectory in self.config.FOLDERS_TO_NOT_ZIP:
+                        if notDirectory in currentPath:
+                            folderCheck = False
+                            break
+
+                    if folderCheck:
+
                         if os.path.islink(currentPath):
                             print(f'skipping : {currentPath}')
+
                         else:
-                            if currentPath != '/Users/rafael/Documents/Programming/notebooks/testing/item.zip':
+                            fileCheck = True
+
+                            for notFile in self.config.FILES_TO_NOT_ZIP:
+                                if notfile == currentPath:
+                                    fileCheck = False
+
+                            if fileCheck:
                                 print(f'zipping : {currentPath}')
                                 zipper.write(currentPath)
 
