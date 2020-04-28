@@ -30,3 +30,12 @@ class Config:
     # NOTE: Might slow computer/use up read and write of your storage system.
     # Example 7:30PM local time \/
     TIME_TO_ZIP = datetime.time(hour=12 + 7, minute=30, second=20)
+
+    # How many daily zips to store
+    DAYS_TO_STORE = 3
+
+    # How many weekly zips to store
+    WEEKS_TO_STORE = 2
+
+    # How many monthly zips to store
+    MONTHS_TO_STORE = 6
