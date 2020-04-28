@@ -12,7 +12,7 @@ Always use absolute paths within this configuration file
 class Config:
     
     # Folder to store backups
-    BACKUP_FOLDER = os.path.join('Library', 'Backup')
+    BACKUP_FOLDER = os.path.join('Backup')
 
     # Backup filename
     BACKUP_NAME = 'backup'
