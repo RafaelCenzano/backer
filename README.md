@@ -18,6 +18,12 @@ or with pip manually
 pip3 install -r requirements.txt
 ```
 
+Edit and setup config.py, then run setup.py
+
+```
+python3 setup.py
+```
+
 ## Running the program
 
 Run description
