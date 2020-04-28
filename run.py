@@ -36,16 +36,32 @@ runObject = main.Core(configurations)
 runObject.zipArchive()
 
 # Main loop
+logger.info('Start main loop')
+
 #while True:
 if True:
 
     '''
     now = datetime.datetime.now()
+    logger.debug(f'Current datetime: {now}')
+    logger.info('Setting start time')
+
     target = datetime.datetime.combine(datetime.date.today(), configurations.TIME_TO_ZIP)
+    logger.debug(f'Target datetime: {target}')
+    logger.info('Set target time')
     
     if target < now:
+        logger.debug(f'Target before adding a day via time delta: {target}')
         target += datetime.timedelta(days=1)
+        logger.debug(f'Target after adding a via time delta: {target}')
+        logger.info('Adding 1 day to timedelta to delay loop until target time the next day')
 
-    delay((target - now).total_seconds())
+    timeToDelay = (target - now).total_seconds()
+    logger.info('Being delay')
+    logger.debug(f'Delay: {timeToDelay}')
+    delay(timeToDelay)
+
+    logger.info('Complete delay and begin zip archive')
     runObject.zipArchive()
+    logger.info('Complete archive')
     '''
