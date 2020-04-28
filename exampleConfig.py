@@ -31,11 +31,11 @@ class Config:
     # Example 7:30PM local time \/
     TIME_TO_ZIP = datetime.time(hour=12 + 7, minute=30, second=20)
 
-    # How many daily zips to store
+    # How many daily zips to store. 1 - 6 days
     DAYS_TO_STORE = 3
 
-    # How many weekly zips to store
+    # How many weekly zips to store 1 - 3 weeks
     WEEKS_TO_STORE = 2
 
-    # How many monthly zips to store
+    # How many monthly zips to store 1 - 12 months
     MONTHS_TO_STORE = 6
