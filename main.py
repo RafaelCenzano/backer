@@ -17,7 +17,7 @@ class Core:
 
         # create console and file handler
         term = logging.StreamHandler()
-        logfile = logging.FileHandler('/' + os.path.join(self.config.BACKUP_FOLDER, 'logs', 'backer.log'))
+        logfile = logging.FileHandler('/' + os.path.join(self.config.BACKUP_FOLDER, 'data', 'backer.log'))
 
         # create formatter and add to term and logfile
         formatter = logging.Formatter('%(asctime)s %(name)s - %(levelname)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
