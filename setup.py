@@ -1,8 +1,9 @@
 #from setuptools import setup, find_packages
 #from os import getcwd, path
 import os
-import json
 import sys
+import json
+import config
 
 #currentDir = getcwd()
 
