@@ -1,14 +1,19 @@
-from setuptools import setup, find_packages
-from os import getcwd, path
+#from setuptools import setup, find_packages
+#from os import getcwd, path
+import os
+import json
+import sys
 
-currentDir = getcwd()
+#currentDir = getcwd()
 
+'''
 # Get Readme text
 with open(path.join(currentDir, 'README.md'), encoding='utf-8') as fR:
     readme = fR.read()
-
+'''
 
 # Run setup
+'''
 setup(
 
     # Project's name
@@ -104,3 +109,49 @@ setup(
 # https://pypi.org/project/PyStarter/
 # pip3 install pystarter
 # The above message can be deleted, it does not effect the python code.
+'''
+
+# Create config object
+configurations = config.Config()
+
+if os.path.isdir(configurations.BACKUP_FOLDER) == False:
+    print('Backup folder not found')
+    sys.exit()
+
+for folders in configurations.FOLDERS_TO_ZIP:
+    if os.path.isdir(f'/{folders}/') == False:
+        print(f'Folder: {folders} not found')
+        sys.exit()
+
+if configurations.DAYS_TO_STORE <= 0 or configurations.DAYS_TO_STORE > 6:
+    print('DAYS_TO_STORE is too large or small')
+
+if configurations.WEEKS_TO_STORE <= 0 or configurations.WEEKS_TO_STORE > 3:
+    print('WEEKS_TO_STORE is too large or small')
+
+if configurations.MONTHS_TO_STORE <= 0 or configurations.MONTHS_TO_STORE > 12:
+    print('MONTHS_TO_STORE is too large or small')
+
+if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/day/') == False:
+    os.mkdir(f'/{configurations.BACKUP_FOLDER}/day/')
+
+if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/week/') == False:
+    os.mkdir(f'/{configurations.BACKUP_FOLDER}/week/')
+
+if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/month/') == False:
+    os.mkdir(f'/{configurations.BACKUP_FOLDER}/month/')
+
+if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/data/') == False:
+    os.mkdir(f'/{configurations.BACKUP_FOLDER}/data/')
+
+if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
+
+    jsonData = {
+        'month': {}
+        'week': {}
+        'day': {}
+    }
+    
+    with open(f'/{configurations.BACKUP_FOLDER}/data/data.json', 'w') as jsonFile:
+        json.dump(jsonData, jsonFile)
+
