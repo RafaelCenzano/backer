@@ -147,8 +147,8 @@ if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/data/') == False:
 if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
 
     jsonData = {
-        'month': {}
-        'week': {}
+        'month': {},
+        'week': {},
         'day': {}
     }
     
