@@ -115,7 +115,7 @@ setup(
 # Create config object
 configurations = config.Config()
 
-if os.path.isdir(configurations.BACKUP_FOLDER) == False:
+if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/') == False:
     print('Backup folder not found')
     sys.exit()
 
@@ -155,4 +155,3 @@ if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
     
     with open(f'/{configurations.BACKUP_FOLDER}/data/data.json', 'w') as jsonFile:
         json.dump(jsonData, jsonFile)
-
