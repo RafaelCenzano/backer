@@ -124,14 +124,14 @@ for folders in configurations.FOLDERS_TO_ZIP:
         print(f'Folder: {folders} not found')
         sys.exit()
 
-if configurations.DAYS_TO_STORE <= 0 or configurations.DAYS_TO_STORE > 6:
-    print('DAYS_TO_STORE is too large or small')
+if configurations.DAYS_TO_STORE <= 0 or configurations.DAYS_TO_STORE > 6 or isinstance(configurations.DAYS_TO_STORE, int) == False:
+    print('DAYS_TO_STORE is too large or small or not an integer')
 
-if configurations.WEEKS_TO_STORE <= 0 or configurations.WEEKS_TO_STORE > 3:
-    print('WEEKS_TO_STORE is too large or small')
+if configurations.WEEKS_TO_STORE <= 0 or configurations.WEEKS_TO_STORE > 3 or isinstance(configurations.WEEKS_TO_STORE, int) == False:
+    print('WEEKS_TO_STORE is too large or small or not an integer')
 
-if configurations.MONTHS_TO_STORE <= 0 or configurations.MONTHS_TO_STORE > 12:
-    print('MONTHS_TO_STORE is too large or small')
+if configurations.MONTHS_TO_STORE <= 0 or configurations.MONTHS_TO_STORE > 12 or isinstance(configurations.MONTHS_TO_STORE, int) == False:
+    print('MONTHS_TO_STORE is too large or small or not an integer')
 
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/day/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/day/')
