@@ -1,5 +1,5 @@
 import os
-import main
+import backer
 import config
 import logging
 import datetime
@@ -31,7 +31,7 @@ logger.addHandler(logfile)
 logger.setLevel(logging.INFO)
 
 # Create the run object
-runObject = main.Core(configurations)
+runObject = backer.Core(configurations)
 
 runObject.zipArchive()
 
