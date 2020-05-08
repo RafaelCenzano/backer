@@ -11,13 +11,16 @@ File for main code
 class Core:
 
     def __init__(self, configObject):
-        
+
+        self.configurations = configObject
+        self.configurations.FOLDERS_TO_NOT_ZIP.append(self.configurations.BACKUP_FOLDER)
+
         # create logger
         self.logger = logging.getLogger(__name__)
 
         # create console and file handler
         term = logging.StreamHandler()
-        logfile = logging.FileHandler('/' + os.path.join(self.config.BACKUP_FOLDER, 'data', 'backer.log'))
+        logfile = logging.FileHandler('/' + os.path.join(self.configurations.BACKUP_FOLDER, 'data', 'backer.log'))
 
         # create formatter and add to term and logfile
         formatter = logging.Formatter('%(asctime)s %(name)s - %(levelname)s : %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -30,21 +33,19 @@ class Core:
 
         self.logger.setLevel(logging.INFO)
 
-        self.config = configObject
-        self.config.FOLDERS_TO_NOT_ZIP.append(self.config.BACKUP_FOLDER)
-
+        self.logger.debug('Created logger')
         self.logger.debug('Configuration loaded into class variable config')
 
     def zipArchive(self):
 
-        self.logger.info('Being zipping archive')
+        self.logger.info('Begining zipping archive')
         startZip = datetime.datetime.now()
         self.logger.debug(f'Start zip: {startZip}')
 
         folders = []
 
-        self.logger.info('Being compiling list of folders to zip')
-        for pathItems in self.config.FOLDERS_TO_ZIP:
+        self.logger.info('Compiling list of folders to zip')
+        for pathItems in self.configurations.FOLDERS_TO_ZIP:
             folders.append(f'/{pathItems}/')
             self.logger.debug(f'Folder added: /{pathItems}/')
 
@@ -53,7 +54,7 @@ class Core:
         todayFormatted = repr(startZip.month) + '-' + repr(startZip.day) + '-' + repr(startZip.year)
         self.logger.debug(f'Format date: {todayFormatted}')
 
-        archiveName = '/' + os.path.join(self.config.BACKUP_FOLDER, 'day', self.config.BACKUP_NAME + '_' + todayFormatted + '.zip')
+        archiveName = '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'day', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')
         self.logger.debug(f'Archive path and name set: {archiveName}')
 
         with zipfile.ZipFile(archiveName, 'w', compression=zipfile.ZIP_DEFLATED) as zipper:
@@ -75,7 +76,7 @@ class Core:
 
                         folderCheck = True
 
-                        for notDirectory in self.config.FOLDERS_TO_NOT_ZIP:
+                        for notDirectory in self.configurations.FOLDERS_TO_NOT_ZIP:
                             if notDirectory in currentPath:
                                 folderCheck = False
                                 self.logger.debug(f'File: {currentPath} : in blocked directory: {notDirectory}')
@@ -89,8 +90,8 @@ class Core:
                             else:
                                 fileCheck = True
 
-                                for notFile in self.config.FILES_TO_NOT_ZIP:
-                                    if notfile == currentPath:
+                                for notFile in self.configurations.FILES_TO_NOT_ZIP:
+                                    if notFile == currentPath:
                                         fileCheck = False
                                         self.logger.debug(f'File: {currentPath} blocked from being zipped')
                                         break
@@ -104,7 +105,7 @@ class Core:
         self.logger.info('Complete zip archive')
         self.logger.debug(f'Zip completed at {endZip}')
 
-        self.logger.info(f'Operation took {(endZip - startZip).seconds()}')
+        self.logger.info(f'Operation took {endZip - startZip}')
         self.logger.debug(f'Operation began at {startZip}')
         self.logger.debug(f'Operation ended at {endZip}')
 
