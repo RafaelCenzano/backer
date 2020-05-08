@@ -26,6 +26,12 @@ class Config:
     # Files to not zip
     FILES_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'file.txt')]
 
+    # Folders to not zip
+    FOLDERS_TO_NOT_BACKUP = [os.path.join('Users', 'jimdoe', 'Documents', 'thing')]
+
+    # Files to not zip
+    FILES_TO_NOT_BACKUP = [os.path.join('Users', 'jimdoe', 'Documents', 'file.txt')]
+
     # Time to zip
     # NOTE: Might slow computer/use up read and write of your storage system.
     # Example 7:30PM local time \/
