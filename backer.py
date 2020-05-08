@@ -91,7 +91,7 @@ class Core:
                                 fileCheck = True
 
                                 for notFile in self.configurations.FILES_TO_NOT_ZIP:
-                                    if notFile == currentPath:
+                                    if '/' + notFile == currentPath:
                                         fileCheck = False
                                         self.logger.debug(f'File: {currentPath} blocked from being zipped')
                                         break
