@@ -102,8 +102,7 @@ class Core:
                                     self.logger.debug(f'Zipped: {currentPath}')
 
         endZip = datetime.datetime.now()
-        self.logger.info('Complete zip archive')
-        self.logger.debug(f'Zip completed at {endZip}')
+        self.logger.info(f'Zip completed at {endZip}')
 
         self.logger.info(f'Operation took {endZip - startZip}')
         self.logger.debug(f'Operation began at {startZip}')
