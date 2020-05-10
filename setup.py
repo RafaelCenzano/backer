@@ -158,3 +158,5 @@ if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
     
     with open(f'/{configurations.BACKUP_FOLDER}/data/data.json', 'w') as jsonFile:
         json.dump(jsonData, jsonFile)
+
+print('Follow instructions in README on how to set up cron jobs')
