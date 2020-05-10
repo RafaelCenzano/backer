@@ -33,29 +33,8 @@ logger.setLevel(logging.INFO)
 # Create the run object
 runObject = backer.Core(configurations)
 
-# Main loop
-logger.info('Start main loop')
 
-while True:
-
-    now = datetime.datetime.now()
-    logger.debug(f'Current datetime: {now}')
-    logger.info('Setting start time')
-
-    target = datetime.datetime.combine(datetime.date.today(), configurations.TIME_TO_ZIP)
-    logger.debug(f'Target datetime: {target}')
-    logger.info('Set target time')
-    
-    if target < now:
-        logger.debug(f'Target before adding a day via time delta: {target}')
-        target += datetime.timedelta(days=1)
-        logger.debug(f'Target after adding a via time delta: {target}')
-        logger.info('Adding 1 day to timedelta to delay loop until target time the next day')
-
-    timeToDelay = (target - now).total_seconds()
-    logger.info(f'Delay: {target - now}')
-    delay(timeToDelay)
-
-    logger.info('Complete delay and begin zip archive')
-    runObject.zipArchive()
-    logger.info('Complete archive')
+# Create archive
+logger.info('Begin zip archive')
+runObject.zipArchive()
+logger.info('Complete program')
