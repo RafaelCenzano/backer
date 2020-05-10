@@ -32,11 +32,6 @@ class Config:
     # Files to not zip
     FILES_TO_NOT_BACKUP = [os.path.join('Users', 'jimdoe', 'Documents', 'file.txt')]
 
-    # Time to zip
-    # NOTE: Might slow computer/use up read and write of your storage system.
-    # Example 7:30PM local time \/
-    TIME_TO_ZIP = datetime.time(hour=12 + 7, minute=30, second=20)
-
     # How many daily zips to store. 1 - 6 days
     DAYS_TO_STORE = 3
 
