@@ -1,7 +1,10 @@
 import os
+import json
+import shutil
 import zipfile
 import logging
 import datetime
+
 
 '''
 File for main code
@@ -108,5 +111,28 @@ class Core:
         self.logger.debug(f'Operation began at {startZip}')
         self.logger.debug(f'Operation ended at {endZip}')
 
+        with open(f'/{self.configurations.BACKUP_FOLDER}/data/data.json', r) as jsonFile:
+            jsonData = json.load(jsonFile)
+
+        '''
+        jsonData = {
+            'month': {},
+            'week': {},
+            'day': {}
+        }
+        '''
+
+        if not bool(jsonData['month']):
+
+            shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
+            shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
+
+            jsonData['day'][archiveName] = datetime.now().strftime('%m/%d/%Y')
+            jsonData['week']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = datetime.now().strftime('%m/%d/%Y')
+            jsonData['month']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = datetime.now().strftime('%m/%d/%Y')
+
+        else:
+
+            pass
 
     
