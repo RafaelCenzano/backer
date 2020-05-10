@@ -4,7 +4,7 @@ import datetime
 '''
 Config for backer
 
-create empty lists for things you don't need or want
+Create empty lists for things you don't need or want
 
 Always use absolute paths within this configuration file
 '''
@@ -17,7 +17,7 @@ class Config:
     # Backup filename
     BACKUP_NAME = 'backup'
 
-    # Folders to zip
+    # Folders to zip, requires at least one item
     FOLDERS_TO_ZIP = [os.path.join('Users', 'jimdoe', 'Documents')]
 
     # Folders to not zip
