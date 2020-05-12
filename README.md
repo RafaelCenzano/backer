@@ -4,7 +4,7 @@ Backup software for maintaining a backup of files in a zip at set times. The pro
 
 ## Setup
 
-Edit `config.py` to configure **Absolute paths** to your backup folder and to block any files and folders you don't want to zip or backup.
+Duplicate `exampleConfig.py` as `config.py` to configure **Absolute paths** to your backup folder and to block any files and folders you don't want to zip or backup.
 
 Go to your terminal.
 - Open crontab, you can use your own terminal editor, these instructions will be for vi/vim.
