@@ -168,7 +168,8 @@ class Core:
                     for archive in jsonData['day']:
                         then = datetime.datetime.strptime(jsonData['day'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
-                            del jsonData['day'][archive]#deleting file
+                            os.remove(archive)
+                            del jsonData['day'][archive]
 
 
             if len(jsonData['week']) > self.configurations.WEEKS_TO_STORE:
@@ -185,6 +186,7 @@ class Core:
                     for archive in jsonData['week']:
                         then = datetime.datetime.strptime(jsonData['week'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
+                            os.remove(archive)
                             del jsonData['week'][archive]
 
 
@@ -202,6 +204,7 @@ class Core:
                     for archive in jsonData['month']:
                         then = datetime.datetime.strptime(jsonData['month'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
+                            os.remove(archive)
                             del jsonData['month'][archive]
 
         with open(f'/{self.configurations.BACKUP_FOLDER}/data/data.json', 'w') as jsonFile:
