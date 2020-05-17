@@ -120,12 +120,17 @@ class Core:
 
         if not bool(jsonData['month']):
 
+            self.logger.info('new backup system being setup')
+
             shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
+            self.logger.debug('Copy file to month folder')
             shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
+            self.logger.debug('Copy file to week folder')
 
             jsonData['day'][archiveName] = now.strftime(datetimeFormat)
             jsonData['week']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = now.strftime(datetimeFormat)
             jsonData['month']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = now.strftime(datetimeFormat)
+            self.logger.debug('Add initial Json data')
 
         else:
 
@@ -140,6 +145,7 @@ class Core:
             minimumDeltaDay = min(timeDeltaDays0)
 
             if minimumDeltaDay >= 7:
+                self.logger.info('Adding new week item')
                 shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
                 jsonData['week']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'week', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = now.strftime(datetimeFormat)
 
@@ -150,12 +156,15 @@ class Core:
             minimumDeltaDay = min(timeDeltaDays1)
 
             if minimumDeltaDay >= 30:
+                self.logger.info('Adding new month item')
                 shutil.copyfile(archiveName, '/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip'))
                 jsonData['month']['/' + os.path.join(self.configurations.BACKUP_FOLDER, 'month', self.configurations.BACKUP_NAME + '_' + todayFormatted + '.zip')] = now.strftime(datetimeFormat)
 
 
             if len(jsonData['day']) > self.configurations.DAYS_TO_STORE:
+                self.logger.info('Clearing old days')
                 numberOver = len(jsonData['day']) - self.configurations.DAYS_TO_STORE
+                self.logger.debug(f'Clearing {numberOver} day items')
                 for i in range(numberOver):
                     timeDeltaDays = []
 
@@ -168,12 +177,15 @@ class Core:
                     for archive in jsonData['day']:
                         then = datetime.datetime.strptime(jsonData['day'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
+                            self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['day'][archive]
 
 
             if len(jsonData['week']) > self.configurations.WEEKS_TO_STORE:
+                self.logger.info('Clearing old weeks')
                 numberOver = len(jsonData['week']) - self.configurations.WEEKS_TO_STORE
+                self.logger.debug(f'Clearing {numberOver} week items')
                 for i in range(numberOver):
                     timeDeltaDays = []
 
@@ -186,12 +198,15 @@ class Core:
                     for archive in jsonData['week']:
                         then = datetime.datetime.strptime(jsonData['week'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
+                            self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['week'][archive]
 
 
             if len(jsonData['month']) > self.configurations.MONTHS_TO_STORE:
+                self.logger.info('Clearing old months')
                 numberOver = len(jsonData['month']) - self.configurations.MONTHS_TO_STORE
+                self.logger.debug(f'Clearing {numberOver} month items')
                 for i in range(numberOver):
                     timeDeltaDays = []
 
@@ -204,11 +219,16 @@ class Core:
                     for archive in jsonData['month']:
                         then = datetime.datetime.strptime(jsonData['month'][archive], datetimeFormat)
                         if (now - then).days == maximumDeltaDay:
+                            self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['month'][archive]
 
+        self.logger.info('Complete Json work')
+
         with open(f'/{self.configurations.BACKUP_FOLDER}/data/data.json', 'w') as jsonFile:
             json.dump(jsonData, jsonFile)
+
+        self.logger.debug('Dump and write to json file')
 
 
 
