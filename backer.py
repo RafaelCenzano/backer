@@ -180,6 +180,7 @@ class Core:
                             self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['day'][archive]
+                            break
 
 
             if len(jsonData['week']) > self.configurations.WEEKS_TO_STORE:
@@ -201,6 +202,7 @@ class Core:
                             self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['week'][archive]
+                            break
 
 
             if len(jsonData['month']) > self.configurations.MONTHS_TO_STORE:
@@ -222,6 +224,7 @@ class Core:
                             self.logger.debug(f'Delete {archive}')
                             os.remove(archive)
                             del jsonData['month'][archive]
+                            break
 
         self.logger.info('Complete Json work')
 
