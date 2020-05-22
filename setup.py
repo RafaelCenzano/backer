@@ -145,9 +145,6 @@ if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/month/') == False:
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/data/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/data/')
 
-if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/folders_files/') == False:
-    os.mkdir(f'/{configurations.BACKUP_FOLDER}/folders_files/')
-
 if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
 
     jsonData = {
