@@ -18,7 +18,7 @@ class Config:
     BACKUP_NAME = 'backup'
 
     # Folders to zip, requires at least one item
-    FOLDERS_TO_ZIP = [os.path.join('Users', 'jimdoe', 'Documents')]
+    FOLDERS_TO_ZIP = [os.path.join('Users', 'jimdoe', 'Documents'), os.path.join('Users', 'jimdoe', 'Desktop')]
 
     # Folders to not zip
     FOLDERS_TO_NOT_ZIP = [os.path.join('Users', 'jimdoe', 'Documents', 'thing')]
