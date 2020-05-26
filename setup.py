@@ -115,36 +115,44 @@ setup(
 # Create config object
 configurations = config.Config()
 
+# Check for backup folder
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/') == False:
-    print('Backup folder not found')
-    sys.exit()
+    sys.exit('Backup folder not found')
 
+# check that folders to zip exsist, exit and alert user if folder not found
 for folders in configurations.FOLDERS_TO_ZIP:
     if os.path.isdir(f'/{folders}/') == False:
-        print(f'Folder: {folders} not found')
-        sys.exit()
+        sys.exit(f'Folder: {folders} not found')
 
-if configurations.DAYS_TO_STORE <= 0 or configurations.DAYS_TO_STORE > 6 or isinstance(configurations.DAYS_TO_STORE, int) == False:
-    print('DAYS_TO_STORE is too large or small or not an integer')
+# Check days to store count is valid
+if isinstance(configurations.DAYS_TO_STORE, int) == False or configurations.DAYS_TO_STORE <= 0 or configurations.DAYS_TO_STORE > 6:
+    sys.exit('DAYS_TO_STORE is too large or small or not an integer')
 
-if configurations.WEEKS_TO_STORE <= 0 or configurations.WEEKS_TO_STORE > 3 or isinstance(configurations.WEEKS_TO_STORE, int) == False:
-    print('WEEKS_TO_STORE is too large or small or not an integer')
+# Check weeks to store count is valid
+if isinstance(configurations.WEEKS_TO_STORE, int) == False or configurations.WEEKS_TO_STORE <= 0 or configurations.WEEKS_TO_STORE > 3:
+    sys.exit('WEEKS_TO_STORE is too large or small or not an integer')
 
-if configurations.MONTHS_TO_STORE <= 0 or configurations.MONTHS_TO_STORE > 12 or isinstance(configurations.MONTHS_TO_STORE, int) == False:
-    print('MONTHS_TO_STORE is too large or small or not an integer')
+# Check months to store count is valid
+if isinstance(configurations.MONTHS_TO_STORE, int) == False or configurations.MONTHS_TO_STORE <= 0 or configurations.MONTHS_TO_STORE > 12:
+    sys.exit('MONTHS_TO_STORE is too large or small or not an integer')
 
+# Create day folder to store daily backups, if folder doesn't exsist already
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/day/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/day/')
 
+# Create week folder to store weekly backups, if folder doesn't exsist already
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/week/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/week/')
 
+# Create month folder to store monthly backups, if folder doesn't exsist already
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/month/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/month/')
 
+# Create data folder to store data on backups, if folder doesn't exsist already
 if os.path.isdir(f'/{configurations.BACKUP_FOLDER}/data/') == False:
     os.mkdir(f'/{configurations.BACKUP_FOLDER}/data/')
 
+# Create json data file to store backup data, if folder doesn't exsist already
 if os.path.isfile(f'/{configurations.BACKUP_FOLDER}/data/data.json') == False:
 
     jsonData = {
