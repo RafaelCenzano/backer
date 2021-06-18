@@ -1,5 +1,7 @@
 # Backer
 
+*Note* this was a project to work with paths and zip files. It does zip and store your files but since it stores these backups on your own device it is not a proper backup, it also only saves your files not preferences and other items on your computer. Using software like Time Machine is much better then this repo which was used for learning.
+
 Backup software for maintaining a backup of files in a zip at set times. The program will manage old backups saving backups for a certain amount of days, weeks, and months bases off how the user configures the app. This was created on and for a macbook most items should be avaible on linux.
 
 ## Setup
